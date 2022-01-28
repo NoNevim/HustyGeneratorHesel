@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeneratorHesla</title>
+</head>
+<body>
+
+  <h1>Velmi husty generator hesel</h1>
+
+  <button>generuj!</button>
+
+  <p></p>
+
+  <script>  
+      const append = "987654321";
+
+      const heslo = document.querySelector('p');
+      const tlacitko = document.querySelector('button');
+
+      const firstCharacter = "ABCDEFGHJKLMNPQRSTUVWX";
+      const secondCharacter = "abcdefghjkmnpqrstuvx";     
+      const delkaFirstChar = firstCharacter.length;
+      const delkaSecondChar = secondCharacter.length;
+
+      function generuj() {          
+        heslo.textContent = firstCharacter.charAt(random(delkaFirstChar)) + secondCharacter.charAt(random(delkaSecondChar)) + secondCharacter.charAt(random(delkaSecondChar)) + append;
+      }
+
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+
+      tlacitko.addEventListener('click', generuj);
+
+  </script>
+  
+</body>
+</html>
