@@ -5,36 +5,90 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GeneratorHesla</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+      margin-bottom: 60px;
+    }
+    p {
+      font-size: 11;
+      margin-top: 40px;
+    }
+
+    .odsad,
+    .neodsad {      
+      font-weight: bold;
+    }
+
+    .odsad {
+      margin-left: 5ch;
+    }
+
+    input {
+      width: 7ch;
+    }
+
+  </style>
+
+
 </head>
 <body>
 
   <h1>Velmi husty generator hesel</h1>
 
-  <button>generuj!</button>
+  <p>     
+    <button>Generuj heslo</button> pro kid:
+    <input type="text">
+  </p>
 
-  <p></p>
+
+  <p class="pass">------------</p>
+
+  <p class="other"></p>
+
+
 
   <script>  
-      const append = "987654321";
-
-      const heslo = document.querySelector('p');
+      
+      const pass = document.querySelector('.pass');
+      const other = document.querySelector('.other');
       const tlacitko = document.querySelector('button');
+      const vstup = document.querySelector('input');
 
+      const append = "987654321";
       const firstCharacter = "ABCDEFGHJKLMNPQRSTUVWX";
       const secondCharacter = "abcdefghjkmnpqrstuvx";     
       const delkaFirstChar = firstCharacter.length;
       const delkaSecondChar = secondCharacter.length;
 
-      function generuj() {          
-        heslo.textContent = firstCharacter.charAt(random(delkaFirstChar)) + secondCharacter.charAt(random(delkaSecondChar)) + secondCharacter.charAt(random(delkaSecondChar)) + append;
+      function generujHeslo() {          
+        return (firstCharacter.charAt(random(delkaFirstChar)) + secondCharacter.charAt(random(delkaSecondChar)) + secondCharacter.charAt(random(delkaSecondChar)) + append);
       }
 
       function random(number) {
         return Math.floor(Math.random()*number);
       }
 
-      tlacitko.addEventListener('click', generuj);
+      function vypis() {
+        outpHeslo = generujHeslo();
+        if (vstup.value === "") {
+          pass.innerHTML = `<span class=neodsad>${outpHeslo}</span>`;
+          other.innerHTML = "";
+        } else {        
+        pass.innerHTML = `Nové heslo pro Váš účet <strong>${vstup.value}</strong> do OMS je:        <span class=odsad>${outpHeslo}</span>`;
+        other.innerHTML = `Vyzkoušejte prosím přihlášení a pokud se zadaří, heslo si prosím rovnou změňte (návod posílám v příloze).<br/>
+                          Kdyby byl někde problém, klidně pište/volejte. <br/><br/><br/>S pozdravem`
+        }
+      }
 
+      tlacitko.addEventListener('click', vypis);    // spusteni pri stisku tlacitka
+
+      vstup.addEventListener('change', vypis);    // spusteni pri zmene hodnoty ve vstupnim poli
+
+     
   </script>
   
 </body>
